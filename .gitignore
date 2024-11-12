@@ -38,3 +38,6 @@ Thumbs.db
 # Ignore temporary files
 *.tmp
 *.temp
+
+# Certificates
+/backend/certs/
