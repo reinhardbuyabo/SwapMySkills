@@ -1,101 +1,294 @@
-import Image from "next/image";
+// src/app/page.js
+'use client';
+
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="container">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="logo">
+          <Link href="/">SkillSwap</Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <ul className="nav-links">
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/signup">Sign Up</Link></li>
+          <li><Link href="/login">Log In</Link></li>
+          <li><Link href="/skills">Skills</Link></li>
+        </ul>
+      </nav>
+
+      {/* Hero Section */}
+      <header className="hero">
+        <div className="hero-content">
+          <h1>Welcome to Skill Swap Community</h1>
+          <p>Exchange your skills and learn from others in a vibrant community.</p>
+          <div className="cta-buttons">
+            <Link href="/signup"><button className="cta">Get Started</button></Link>
+            <Link href="/login"><button className="cta">Log In</button></Link>
+            <Link href="/skills"><button className="cta">Explore Skills</button></Link>
+          </div>
+        </div>
+      </header>
+
+      {/* How It Works Section */}
+      <section className="overview">
+        <div className="section-container">
+          <h2>How it works</h2>
+          <p>
+            SkillSwap is an intuitive platform designed for individuals who wish to offer their skills and learn from others. Whether you are interested in coding, languages, or cooking, there's something for everyone.
+          </p>
+        </div>
+      </section>
+
+      {/* Popular Skills Section with Cards */}
+      <section className="popular-skills">
+        <div className="section-container">
+          <h2>Popular Skills</h2>
+          <div className="skills-grid">
+            <div className="skill-card">
+              <h3>Cooking</h3>
+              <p>Learn to cook delicious meals from experienced chefs!</p>
+              <Link href="/skills/cooking"><button className="cta">Explore</button></Link>
+            </div>
+            <div className="skill-card">
+              <h3>Languages</h3>
+              <p>Improve your fluency in various languages with native speakers.</p>
+              <Link href="/skills/languages"><button className="cta">Explore</button></Link>
+            </div>
+            <div className="skill-card">
+              <h3>Coding</h3>
+              <p>Enhance your programming skills through hands-on experience.</p>
+              <Link href="/skills/coding"><button className="cta">Explore</button></Link>
+            </div>
+            <div className="skill-card">
+              <h3>Gardening</h3>
+              <p>Get tips and guidance on how to grow your own garden.</p>
+              <Link href="/skills/gardening"><button className="cta">Explore</button></Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-container">
+          <p>&copy; 2024 SkillSwap | All Rights Reserved</p>
+          <ul>
+            <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link href="/terms-of-service">Terms of Service</Link></li>
+          </ul>
+        </div>
       </footer>
+
+      <style jsx>{`
+        .container {
+          font-family: 'Roboto', sans-serif;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 20px;
+          background-color: #2c3e50;
+          color: white;
+          border-radius: 12px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+          font-size: 1.8rem;
+          font-weight: bold;
+          color: #ecf0f1;
+        }
+
+        .nav-links {
+          list-style: none;
+          display: flex;
+          gap: 20px;
+        }
+
+        .nav-links li a {
+          color: #ecf0f1;
+          text-decoration: none;
+          padding: 8px 15px;
+          border-radius: 5px;
+          transition: background-color 0.3s ease-in-out;
+        }
+
+        .nav-links li a:hover {
+          background-color: #3498db;
+        }
+
+        /* Hero Section */
+        .hero {
+          background: url('/hero-bg.jpg') no-repeat center center/cover;
+          color: white;
+          padding: 60px 20px;
+          border-radius: 12px;
+          margin-bottom: 40px;
+          text-align: center;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+          margin-bottom: 20px;
+          font-weight: 700;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+          line-height: 1.6;
+        }
+
+        .cta-buttons button {
+          background-color: #3498db;
+          color: white;
+          border: none;
+          padding: 12px 25px;
+          margin: 10px;
+          cursor: pointer;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+        }
+
+        .cta-buttons button:hover {
+          background-color: #2980b9;
+        }
+
+        /* Section Container */
+        .section-container {
+          background-color: rgba(255, 255, 255, 0.5);
+          padding: 40px;
+          border-radius: 12px;
+          margin-bottom: 40px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+          text-align: center;
+        }
+
+        .section-container h2 {
+          font-size: 2.5rem;
+          color: #2c3e50;
+          margin-bottom: 20px;
+          font-weight: 600;
+        }
+
+        .overview p {
+          font-size: 1.1rem;
+          color: #7f8c8d;
+          line-height: 1.7;
+        }
+
+        /* Skills Grid Layout */
+        .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 20px;
+          margin-top: 20px;
+        }
+
+        .skill-card {
+          background-color: white;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .skill-card:hover {
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-card h3 {
+          font-size: 1.8rem;
+          color: #2c3e50;
+          margin-bottom: 15px;
+          font-weight: 600;
+        }
+
+        .skill-card p {
+          color: #7f8c8d;
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+          line-height: 1.6;
+        }
+
+        .popular-skills a {
+          text-decoration: none;
+        }
+
+        /* Footer Styles */
+        .footer {
+          background-color: #2c3e50;
+          color: white;
+          padding: 20px;
+          margin-top: 60px;
+          border-radius: 12px;
+        }
+
+        .footer-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        .footer-container ul {
+          list-style: none;
+          display: flex;
+          gap: 20px;
+        }
+
+        .footer-container li a {
+          color: white;
+          text-decoration: none;
+        }
+
+        .footer-container li a:hover {
+          text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+          .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+          }
+
+          .hero h1 {
+            font-size: 2rem;
+          }
+
+          .cta-buttons button {
+            width: 100%;
+            margin: 10px 0;
+          }
+
+          .skills-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .footer-container {
+            flex-direction: column;
+            text-align: center;
+          }
+        }
+      `}</style>
     </div>
   );
 }
