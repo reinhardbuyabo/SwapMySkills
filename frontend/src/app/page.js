@@ -15,7 +15,7 @@ export default function Home() {
           <li><Link href="/">Home</Link></li>
           <li><Link href="/signup">Sign Up</Link></li>
           <li><Link href="/login">Log In</Link></li>
-          <li><Link href="/skills">Skills</Link></li>
+          <li><Link href="/homeSkills">Skills</Link></li>
         </ul>
       </nav>
 
