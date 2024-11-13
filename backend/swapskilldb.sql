@@ -1,3 +1,7 @@
+CREATE DATABASE swapmyskillsdb;
+
+\c swapmyskillsdb;
+
 CREATE TABLE "Skill"(
     "skill_id" SERIAL NOT NULL,
     "skill_name" VARCHAR(255) NOT NULL,
@@ -14,7 +18,8 @@ CREATE TABLE "User"(
     "password_hash" VARCHAR(255) NOT NULL,
     "location" VARCHAR(255) NULL,
     "bio" TEXT NULL,
-    "rating" INTEGER NULL
+    "rating" INTEGER NULL,
+    "image" bytea NULL
 );
 ALTER TABLE
     "User" ADD PRIMARY KEY("user_id");

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const pool = require("../config/db");
+const User = require("../models/User"); // Adjust the path as necessary
 
 const protect = async (req, res, next) => {
     let token;
@@ -8,32 +8,29 @@ const protect = async (req, res, next) => {
         try {
             token = req.headers.authorization.split(' ')[1]; // get the 2nd string from the array
             console.log(token);
-            // console.log(process.env.JWT_SECRET); this is okay
+
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            console.log(decoded); // { id: 12, iat: 1718221335, exp: 1720813335 } // sometimes the id property isn't present
-            // employee_result = await pool.query(`SELECT * FROM employee WHERE emp_id=${decoded.id}`);
+            console.log(decoded); // { id: 12, iat: 1718221335, exp: 1720813335 }
 
+            // Find the user by ID using Sequelize
+            const user = await User.findByPk(decoded.id);
 
-            if (employee_result.rows !== 0) {
-                req.user = employee_result.rows[0];
+            if (user) {
+                req.user = user;
+                next();
             } else {
-                next(new Error("Token might not be valid"))
+                res.status(401);
+                next(new Error("Token might not be valid"));
             }
-
-            next();
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
             res.status(401);
-            next(new Error(`Not Authorized: ${err}`));
+            next(new Error(`Not Authorized: ${err.message}`));
         }
-    }
-
-
-    if (!token) {
+    } else {
         res.status(401);
-        next(new Error("Not Authorized!"))
+        next(new Error("Not Authorized, no token"));
     }
-}
+};
 
-module.exports = protect;
+module.exports = { protect };
