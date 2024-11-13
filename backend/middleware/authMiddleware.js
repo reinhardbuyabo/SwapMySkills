@@ -11,7 +11,8 @@ const protect = async (req, res, next) => {
             // console.log(process.env.JWT_SECRET); this is okay
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             console.log(decoded); // { id: 12, iat: 1718221335, exp: 1720813335 } // sometimes the id property isn't present
-            employee_result = await pool.query(`SELECT * FROM employee WHERE emp_id=${decoded.id}`);
+            // employee_result = await pool.query(`SELECT * FROM employee WHERE emp_id=${decoded.id}`);
+
 
             if (employee_result.rows !== 0) {
                 req.user = employee_result.rows[0];
