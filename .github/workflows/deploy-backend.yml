@@ -25,7 +25,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no $DO_USER@$DO_HOST << 'EOF'
             # Navigate to your backend directory on the droplet
-            cd /path/to/backend
+            cd /home/$DO_USER/backend  # Assuming the 'backend' folder is inside the user's home directory
 
             # Pull the latest changes from the GitHub repo
             git pull origin main
@@ -33,4 +33,4 @@ jobs:
             # Install dependencies and restart the Node.js server (assuming PM2 is used)
             npm install
             pm2 restart all
-EOF
+            EOF
