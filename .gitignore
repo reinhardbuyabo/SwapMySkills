@@ -1,0 +1,43 @@
+# Ignore node_modules in both backend and frontend
+/backend/node_modules/
+/frontend/node_modules/
+
+# Ignore build and dist directories
+/backend/build/
+/backend/dist/
+/frontend/build/
+/frontend/dist/
+
+# Ignore environment variable files
+/backend/.env
+/frontend/.env
+
+# Ignore log files
+/backend/logs/
+/frontend/logs/
+/backend/*.log
+/frontend/*.log
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore coverage reports
+/backend/coverage/
+/frontend/coverage/
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Certificates
+/backend/certs/
