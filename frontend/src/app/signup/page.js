@@ -5,17 +5,42 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export default function SignUpPage() {
-  const [formData, setFormData] = useState({ username: '', email: '', password: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the sign-up logic here, e.g., sending formData to your backend API
-    console.log('User data:', formData);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      console.log('Form data:', formData);
+      const response = await fetch('/api/v1/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        console.log('response:', response);
+        throw new Error('Failed to sign up');
+      }
+
+      const data = await response.json();
+      console.log('User data:', data);
+      setSuccess(true);
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message);
+    }
   };
 
   return (
@@ -24,9 +49,9 @@ export default function SignUpPage() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
+          name="name"
+          placeholder="name"
+          value={formData.name}
           onChange={handleChange}
           required
         />
@@ -48,6 +73,8 @@ export default function SignUpPage() {
         />
         <button type="submit">Sign Up</button>
       </form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>Sign up successful!</p>}
       <p>
         Already have an account? <Link href="/login">Log In</Link>
       </p>

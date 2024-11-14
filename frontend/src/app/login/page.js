@@ -6,16 +6,39 @@ import { useState } from 'react';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the login logic here, e.g., sending formData to your backend API
-    console.log('Login data:', formData);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/v1/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to log in');
+      }
+
+      const data = await response.json();
+      console.log('User data:', data);
+      setSuccess(true);
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message);
+    }
   };
 
   return (
@@ -40,6 +63,8 @@ export default function LoginPage() {
         />
         <button type="submit">Log In</button>
       </form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>Login successful!</p>}
       <p>
         Don’t have an account? <Link href="/signup">Sign Up</Link>
       </p>
@@ -47,34 +72,18 @@ export default function LoginPage() {
       <style jsx>{`
         .container {
           max-width: 400px;
-          margin: auto;
-          padding: 20px;
-          text-align: center;
+          margin: 0 auto;
+          padding: 1rem;
         }
-
-        form {
-          display: flex;
-          flex-direction: column;
-        }
-
         input {
-          margin-bottom: 10px;
-          padding: 10px;
-          border-radius: 8px;
-          border: 1px solid #ccc;
+          display: block;
+          width: 100%;
+          padding: 0.5rem;
+          margin-bottom: 1rem;
         }
-
         button {
-          background-color: #0070f3;
-          color: white;
-          padding: 10px;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-        }
-
-        button:hover {
-          background-color: #005bb5;
+          width: 100%;
+          padding: 0.5rem;
         }
       `}</style>
     </div>

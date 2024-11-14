@@ -62,6 +62,7 @@ const createUser = async (req, res) => {
                 password_hash: passwordHash
             });
 
+            console.log('User created:', user);
             res.status(201).json(user);
         }
     } catch (err) {
@@ -87,6 +88,7 @@ const loginUser = async (req, res) => {
 
         // 4. Check if the user exists and the password is correct
         if (user && (await bcrypt.compare(password, user.password_hash))) {
+            console.log('Login successful', user);
             res.json({
                 id: user.id,
                 name: user.name,
